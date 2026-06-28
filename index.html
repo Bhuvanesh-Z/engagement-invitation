@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <meta name="theme-color" content="#0D0500"/>
+  <title>Saranya & Arivazhagan — Engagement Invitation</title>
+
+  <!-- Preload critical fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&family=Lato:wght@300;400&display=swap" rel="stylesheet"/>
+
+  <!-- External stylesheet -->
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     ENTRANCE SCREEN
+     Sequence: black → sparks → kolam → names → CTA
+══════════════════════════════════════════════════ -->
+<div id="entrance" role="button" aria-label="Open Invitation" tabindex="0">
+
+  <!-- Particle canvas for entrance sparks -->
+  <canvas id="entranceParticles"></canvas>
+
+  <!-- Self-drawing Kolam SVG -->
+  <div class="entrance-kolam-wrap">
+    <svg class="entrance-kolam" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer ring -->
+      <circle cx="100" cy="100" r="90" stroke="#C8A96E" stroke-width="1" stroke-dasharray="4 6" opacity="0.6"
+        class="kolam-ring" style="--delay:0s;--dur:1.8s"/>
+      <!-- Mid rings -->
+      <circle cx="100" cy="100" r="70" stroke="#C8A96E" stroke-width="1.5" stroke-dasharray="2 4" opacity="0.8"
+        class="kolam-ring" style="--delay:0.4s;--dur:1.4s"/>
+      <circle cx="100" cy="100" r="50" stroke="#C8A96E" stroke-width="1" opacity="0.9"
+        class="kolam-ring" style="--delay:0.8s;--dur:1.2s"/>
+      <circle cx="100" cy="100" r="30" stroke="#E8D4A0" stroke-width="2"
+        class="kolam-ring" style="--delay:1.1s;--dur:1s"/>
+      <!-- Cardinal petals -->
+      <ellipse cx="100" cy="28" rx="8" ry="16" fill="#C8A96E" opacity="0" class="kolam-petal" style="--delay:1.5s"/>
+      <ellipse cx="100" cy="172" rx="8" ry="16" fill="#C8A96E" opacity="0" class="kolam-petal" style="--delay:1.6s"/>
+      <ellipse cx="28" cy="100" rx="16" ry="8" fill="#C8A96E" opacity="0" class="kolam-petal" style="--delay:1.7s"/>
+      <ellipse cx="172" cy="100" rx="16" ry="8" fill="#C8A96E" opacity="0" class="kolam-petal" style="--delay:1.8s"/>
+      <!-- Diagonal petals -->
+      <ellipse cx="49" cy="49" rx="8" ry="16" fill="#D4738A" opacity="0" class="kolam-petal" style="--delay:1.9s" transform="rotate(45 49 49)"/>
+      <ellipse cx="151" cy="49" rx="8" ry="16" fill="#D4738A" opacity="0" class="kolam-petal" style="--delay:2.0s" transform="rotate(-45 151 49)"/>
+      <ellipse cx="49" cy="151" rx="8" ry="16" fill="#D4738A" opacity="0" class="kolam-petal" style="--delay:2.1s" transform="rotate(-45 49 151)"/>
+      <ellipse cx="151" cy="151" rx="8" ry="16" fill="#D4738A" opacity="0" class="kolam-petal" style="--delay:2.2s" transform="rotate(45 151 151)"/>
+      <!-- Center dots -->
+      <circle cx="100" cy="100" r="8" fill="#E8D4A0" opacity="0" class="kolam-petal" style="--delay:2.3s"/>
+      <circle cx="100" cy="100" r="4" fill="#C8A96E" opacity="0" class="kolam-petal" style="--delay:2.4s"/>
+    </svg>
+  </div>
+
+  <!-- Names reveal -->
+  <div class="entrance-title" id="entranceNames">Saranya & Arivazhagan</div>
+  <div class="entrance-sub">Engagement Invitation</div>
+  <button class="tap-btn" id="tapBtn" onclick="openInvitation()" aria-label="Open the invitation">✦ TAP TO OPEN ✦</button>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     FLOATING PETALS (spawned by JS)
+══════════════════════════════════════════════════ -->
+<div class="petals-bg" id="petalsContainer" aria-hidden="true"></div>
+
+<!-- ══════════════════════════════════════════════
+     BACKGROUND EFFECTS LAYER
+══════════════════════════════════════════════════ -->
+<canvas id="bgCanvas" aria-hidden="true"></canvas>
+
+<!-- ══════════════════════════════════════════════
+     MAIN INVITATION CONTENT
+══════════════════════════════════════════════════ -->
+<div id="main" aria-live="polite">
+
+  <!-- ── HERO ── -->
+  <section class="section" id="hero" aria-label="Hero">
+    <p class="hero-tag fade-in">A Sacred Celebration</p>
+    <span class="om-symbol fade-in" role="img" aria-label="Om">ॐ</span>
+    <p class="blessing-text fade-in">With the Blessings of the Almighty</p>
+    <p class="family-text fade-in">Together with their beloved families<br/>joyfully announce the auspicious engagement of</p>
+
+    <!-- ── 3D COUPLE CANVAS ── -->
+    <div class="couple-3d-wrap fade-in">
+      <div class="couple-3d-glow" aria-hidden="true"></div>
+      <canvas id="coupleCanvas" aria-label="Animated 3D couple illustration"></canvas>
+    </div>
+
+    <!-- ── NAMES ── -->
+    <div class="names-wrap fade-in">
+      <div class="name-bride">Saranya</div>
+      <span class="and-symbol">&amp;</span>
+      <div class="name-groom">Arivazhagan</div>
+    </div>
+    <div class="roles-row fade-in">
+      <span class="role-label">Bride</span>
+      <span class="role-label">Groom</span>
+    </div>
+
+    <div class="divider fade-in" aria-hidden="true">✦</div>
+  </section>
+
+  <!-- ── OCCASION ── -->
+  <section class="section fade-in" aria-label="Occasion">
+    <p class="occasion-label">✦ Auspicious Occasion ✦</p>
+    <h1 class="occasion-title">A Celebration of<br/>Love &amp; Togetherness</h1>
+    <p class="occasion-subtitle">We are delighted to announce our engagement</p>
+  </section>
+
+  <!-- ── DATE & TIME ── -->
+  <section class="section fade-in" aria-label="Date and Time">
+    <p class="occasion-label">✦ The Sacred Day ✦</p>
+    <div class="datetime-grid">
+      <div class="card dt-card">
+        <span class="dt-icon" role="img" aria-label="Calendar">📅</span>
+        <p class="dt-label">Date</p>
+        <p class="dt-value">12th July<br/>2026</p>
+        <p class="dt-sub">Sunday</p>
+      </div>
+      <div class="card dt-card">
+        <span class="dt-icon" role="img" aria-label="Clock">🕕</span>
+        <p class="dt-label">Time</p>
+        <p class="dt-value">6:00 PM</p>
+        <p class="dt-sub">Evening</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── VENUE ── -->
+  <section class="section fade-in" aria-label="Venue">
+    <p class="occasion-label">✦ Sacred Venue ✦</p>
+    <div class="card venue-card">
+      <span class="card-icon" role="img" aria-label="Venue">🏛️</span>
+      <p class="card-title">Engagement Venue</p>
+      <div class="venue-name">SK Party Hall A/C</div>
+      <p class="venue-address">We warmly welcome you to<br/>join us at our celebration</p>
+
+      <!-- Google Maps Embed Preview -->
+      <div class="map-embed-wrap">
+        <iframe
+          title="Venue Map"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=SK+Party+Hall+AC&output=embed"
+          class="map-embed">
+        </iframe>
+      </div>
+
+      <a href="https://maps.app.goo.gl/FqYr7fSX7Gt3477E8?g_st=aw"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="map-btn"
+         aria-label="Open venue in Google Maps">
+        📍 OPEN IN GOOGLE MAPS
+      </a>
+    </div>
+  </section>
+
+  <!-- ── COUNTDOWN ── -->
+  <section class="section fade-in" aria-label="Countdown Timer">
+    <div class="card countdown-wrap">
+      <p class="countdown-title">✦ Counting Down to Our Special Day ✦</p>
+      <div class="countdown-grid">
+        <!-- Each card uses flip animation on every update -->
+        <div class="cd-box" id="cd-box-days">
+          <div class="flip-card">
+            <div class="flip-top"><span id="cd-days-top">00</span></div>
+            <div class="flip-bot"><span id="cd-days-bot">00</span></div>
+            <div class="flip-mid"></div>
+          </div>
+          <div class="cd-label">Days</div>
+        </div>
+        <div class="cd-box" id="cd-box-hours">
+          <div class="flip-card">
+            <div class="flip-top"><span id="cd-hours-top">00</span></div>
+            <div class="flip-bot"><span id="cd-hours-bot">00</span></div>
+            <div class="flip-mid"></div>
+          </div>
+          <div class="cd-label">Hours</div>
+        </div>
+        <div class="cd-box" id="cd-box-mins">
+          <div class="flip-card">
+            <div class="flip-top"><span id="cd-mins-top">00</span></div>
+            <div class="flip-bot"><span id="cd-mins-bot">00</span></div>
+            <div class="flip-mid"></div>
+          </div>
+          <div class="cd-label">Mins</div>
+        </div>
+        <div class="cd-box" id="cd-box-secs">
+          <div class="flip-card">
+            <div class="flip-top"><span id="cd-secs-top">00</span></div>
+            <div class="flip-bot"><span id="cd-secs-bot">00</span></div>
+            <div class="flip-mid"></div>
+          </div>
+          <div class="cd-label">Secs</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SCRATCH CARD ── -->
+  <section class="section fade-in" aria-label="Secret Date Reveal">
+    <p class="scratch-label">✦ The Engagement Date ✦</p>
+    <p class="scratch-hint">A Secret to Reveal — Scratch below to unveil the date</p>
+    <div class="scratch-container" id="scratchContainer">
+      <div class="scratch-reveal">
+        <div>
+          <div class="scratch-date-text">12th July<br/>2 0 2 6</div>
+          <div class="scratch-date-sub">Sunday · 6:00 PM</div>
+        </div>
+      </div>
+      <canvas id="scratchCanvas" width="280" height="110"></canvas>
+    </div>
+    <p class="scratched-msg" id="scratchedMsg" role="status">✦ The auspicious date is revealed ✦</p>
+  </section>
+
+  <!-- ── TAMIL QUOTE ── -->
+  <section class="section fade-in" aria-label="Tamil Quote">
+    <div class="divider" aria-hidden="true">❀</div>
+    <p class="tamil-quote" lang="ta">
+      பல நாள் காத்திருந்த காதல்…<br/>
+      பல நெஞ்சம் கடந்த பயணம்…<br/>
+      இறுதியில் மலர்கிறது இணையும் நாள்…
+    </p>
+    <div class="divider" aria-hidden="true">❀</div>
+  </section>
+
+  <!-- ── CLOSING BLESSING ── -->
+  <section class="section fade-in" aria-label="Closing Blessing">
+    <p class="occasion-label">✦ Our Heartfelt Request ✦</p>
+    <p class="blessing-quote">
+      "May this engagement be the first chapter<br/>
+      of a love story written in golden letters,<br/>
+      blessed by the almighty and cherished<br/>
+      by all who witness it."
+    </p>
+    <br/>
+    <p class="occasion-label">WE JOYFULLY SEEK YOUR BLESSINGS &amp; PRESENCE</p>
+    <div class="closing-names">Saranya &amp; Arivazhagan</div>
+    <p class="closing-sub">— With love and gratitude —</p>
+  </section>
+
+</div><!-- /#main -->
+
+<!-- ══════════════════════════════════════════════
+     MUSIC PLAYER (fixed bottom-right)
+══════════════════════════════════════════════════ -->
+<div id="musicBar" aria-label="Music player">
+  <button class="music-btn" id="musicBtn" onclick="toggleMusic()" aria-label="Toggle background music">🎵</button>
+  <div class="music-label">Neethanae</div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     AUDIO
+     ─ Replace MUSIC_URL in script.js to change track.
+     ─ Drop your .mp3 into the /music/ folder and
+       update the constant: const MUSIC_URL = "music/neethanae.mp3";
+══════════════════════════════════════════════════ -->
+<audio id="bgMusic" loop preload="none">
+  <!-- Source is set dynamically from MUSIC_URL in script.js -->
+</audio>
+
+<!-- Three.js r128 (CDN) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+<!-- Main script -->
+<script src="script.js" defer></script>
+
+</body>
+</html>
