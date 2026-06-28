@@ -64,7 +64,7 @@ html {
     top:0;
     left:50%;
     transform:translateX(-50%);
-    width:420px;
+    width:520px;
     max-width:95%;
     z-index:2;
 
@@ -78,13 +78,21 @@ html {
 }
 
 .names-wrap{
-    position:absolute;
-    bottom:20px;
-    left:50%;
-    transform:translateX(-50%);
-    width:100%;
-    z-index:10;
-    text-align:center;
+
+   position:absolute;
+
+   bottom:40px;
+
+   left:50%;
+
+   transform:translateX(-50%);
+
+   width:100%;
+
+   text-align:center;
+
+   z-index:10;
+
 }
 
 .name-bride,
@@ -1134,6 +1142,52 @@ canvas#scratchCanvas {
   text-transform: uppercase;
   color: var(--gold);
   text-align: center;
+}
+.moon{
+
+position:absolute;
+
+width:430px;
+
+height:430px;
+
+border-radius:50%;
+
+background:radial-gradient(circle,
+#ffe9a3,
+rgba(255,200,80,.55),
+transparent 75%);
+
+top:40px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+z-index:0;
+
+animation:moonGlow 5s ease-in-out infinite;
+
+}
+
+@keyframes moonGlow{
+
+0%,100%{
+
+opacity:.8;
+
+transform:translateX(-50%) scale(1);
+
+}
+
+50%{
+
+opacity:1;
+
+transform:translateX(-50%) scale(1.08);
+
+}
+
 }
 
 /* ══════════════════════════════════════════════════════
